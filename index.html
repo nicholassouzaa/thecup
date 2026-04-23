@@ -216,6 +216,54 @@
 
         footer { padding: 50px; background: #f1f1f1; color: #777; text-align: center; font-size: 0.9rem; } /* Estilo do rodapé */
         footer strong { color: var(--cor-azul); } /* Nome da marca em vermelho no rodapé */
+        /* --- INÍCIO DA ADAPTAÇÃO PARA CELULAR --- */
+
+/* @media avisa que as regras abaixo só funcionam em telas com menos de 768px de largura (celulares e tablets) */
+@media (max-width: 768px) {
+    /* 1. Primeiro, limitamos a largura da "caixa" do formulário no celular */
+    .container-form {
+        width: 90%; /* Ocupa 90% da largura da tela do celular */
+        max-width: 320px; /* Não deixa passar de 320px (tamanho ideal para celular) */
+        margin: 0 auto; /* Centraliza a caixa no meio da tela */
+    }
+
+    /* 2. Ajustamos o comportamento do formulário */
+    .formulario {
+        flex-direction: column; /* Coloca um embaixo do outro */
+        background: transparent; /* Remove o fundo branco de "barra" */
+        box-shadow: none; /* Remove a sombra da barra */
+        padding: 0; /* Remove espaços internos extras */
+        gap: 12px; /* Cria o espaço entre o campo de e-mail e o botão */
+    }
+
+    /* 3. Aqui é onde garantimos que ambos tenham a mesma largura exata */
+    .formulario input, 
+    .formulario button {
+        width: 100%; /* Ambos preenchem 100% dos 320px que definimos acima */
+        box-sizing: border-box; /* ESSENCIAL: Faz o padding ficar "dentro" da largura, sem esticar */
+        margin: 0; /* Garante que não haja margens sobrando */
+        display: block; /* Garante que se comportem como blocos inteiros */
+    }
+
+    /* Opcional: Ajuste o título para combinar com a nova largura */
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    /* Ajusta a grade de benefícios e curiosidades */
+    .grid-steps, 
+    .grid-curiosidades {
+        grid-template-columns: 1fr; /* Força a ter apenas 1 coluna (um card embaixo do outro) */
+        gap: 20px; /* Diminui um pouco o espaço entre os cards */
+    }
+
+    /* Reduz o tamanho da logo no topo para sobrar espaço para o botão */
+    .logo {
+        font-size: 1.3rem; 
+    }
+}
+
+/* --- FIM DA ADAPTAÇÃO PARA CELULAR --- */
     </style> 
     </head>
 <body> 
