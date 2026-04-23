@@ -1,0 +1,356 @@
+<!DOCTYPE html> 
+<html lang="pt-br">
+     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The Cup</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet"> 
+        <link rel="shortcut icon" href="unnamed.png">
+
+    <style> /* Inicia a folha de estilo (CSS) para dar cor e forma ao site */
+        :root { /* Seletor especial para criar variáveis globais que facilitam mudanças de cor */
+            --verde-principal: #0d5c24; /* Variável para o verde escuro da marca */
+            --cor-vermelho: #bd2523; /* Vermelho para alertas e badges */
+            --cor-azul: #00B9EA; /* Azul ciano para informações e destaques */
+            --verde-claro: #e8f5e9; /* Variável para fundos suaves e leitura leve */
+            --dourado: #d4af37; /* Variável para destaques e elementos premium */
+            --cor-fundo-card: #eff1f3;
+            --cor-azul-escuro: #141425;
+            --azul-noite: #0f154b; /* Variável para textos escuros e rodapé pesado */
+            --branco: #ffffff; /* Variável para o branco puro */
+        } /* Fecha o bloco de variáveis */
+
+        html, body { /* Seleciona a página inteira e o corpo do site */
+             height: 100%; /* Garante que o fundo ocupe toda a altura da tela disponível */
+             margin: 0; /* Remove o espaço em branco padrão que o navegador coloca nas bordas */
+             scroll-behavior: smooth; /* Faz com que a rolagem da página seja deslizada e não um pulo seco */
+        } /* Fecha estilos de página */
+
+        body { /* Configurações específicas do corpo do site */
+            display: flex; /* Ativa o modo de layout Flexbox (caixas flexíveis) */
+            flex-direction: column; /* Organiza os elementos um embaixo do outro, como uma pilha */
+            font-family: 'Inter', sans-serif; /* Aplica a fonte baixada do Google em todo o texto */
+            background-color: var(--branco); /* Aplica a cor branca de fundo usando a variável */
+            color: var(--azul-noite); /* Define a cor padrão dos textos usando a variável escura */
+            text-align: center; /* Centraliza todos os textos que não tiverem outra ordem específica */
+        } /* Fecha estilos do corpo */
+
+        .navbar { /* Estiliza a barra de navegação superior */
+            padding: 20px 0; /* Dá um respiro de 20 pixels em cima e embaixo do menu */
+            background: var(--cor-azul-escuro); /* Pinta o fundo da barra com o verde da marca */
+            color: var(--branco); /* Deixa os textos internos da barra brancos */
+        } /* Fecha navbar */
+
+        .container-nav { /* Caixa interna que segura os itens do menu para não espalharem demais */
+            max-width: 1000px; /* Limita a largura do menu a 1000 pixels em telas grandes */
+            margin: 0 auto; /* Centraliza essa caixa no meio da tela */
+            display: flex; /* Organiza os itens internos (logo e botão) de forma flexível */
+            justify-content: space-between; /* Empurra a logo para a esquerda e o botão para a direita */
+            align-items: center; /* Alinha os itens verticalmente no centro da barra */
+            padding: 0 20px; /* Evita que o conteúdo encoste nas bordas em telas de celular */
+        } /* Fecha container-nav */
+
+        .logo { /* Estiliza a marca escrita 'The Cup' */
+            font-weight: 900; /* Define a espessura da letra como extra-negrito */
+            font-size: 1.6rem; /* Aumenta o tamanho da fonte proporcionalmente */
+            color: var(--dourado); /* Aplica a cor dourada na logo */
+            letter-spacing: -1.5px; /* Aperta as letras para um visual mais moderno */
+        } /* Fecha logo */
+
+        .btn-nav { /* Estiliza o botão de inscrição no menu */
+            background: var(--dourado); /* Fundo dourado chamativo */
+            padding: 8px 16px; /* Espaço interno para o botão ter corpo */
+            border-radius: 6px; /* Arredonda levemente os cantos do botão */
+            text-decoration: none; /* Remove o sublinhado padrão de links */
+            color: var(--azul-noite) !important; /* Força o texto a ser escuro ignorando outras ordens */
+            font-weight: 600; /* Deixa o texto do botão em semi-negrito */
+            transition: 0.3s; /* Define que qualquer mudança (como hover) levará 0.3 segundos */
+        } /* Fecha btn-nav */
+
+        .hero { /* Seção principal de impacto inicial */
+           background: linear-gradient(to bottom, var(--cor-azul-escuro) 0%, var(--azul-noite) 100%); /* Degradê escuro moderno */
+            color: var(--branco); /* Texto da seção principal em branco */
+            padding: 80px 20px; /* Espaço grande para dar destaque ao título */
+            clip-path: ellipse(150% 100% at 50% 0%); /* Recorta o fundo em formato de arco (elipse) */
+        } /* Fecha hero */
+
+        .data-badge { /* Estiliza o selo com a contagem de dias */
+            background: rgba(255, 255, 255, 0.1); /* Branco com 10% de transparência */
+            padding: 5px 15px; /* Espaçamento interno lateral e vertical */
+            border-radius: 20px; /* Deixa o selo com as pontas totalmente redondas */
+            font-size: 0.85rem; /* Texto pequeno e discreto */
+            font-weight: 700; /* Texto em negrito */
+            color: var(--dourado); /* Cor dourada para o texto do selo */
+            display: inline-block; /* Faz o fundo envolver apenas o texto e não a linha toda */
+            margin-bottom: 20px; /* Empurra o título para baixo em 20 pixels */
+        } /* Fecha data-badge */
+
+        h1 { /* Estiliza o título principal do site */
+            font-size: 3.5rem; /* Letra bem grande para chamar atenção imediata */
+            font-weight: 900; /* Máximo de negrito possível */
+            letter-spacing: -2px; /* Letras bem próximas para estilo de manchete */
+            line-height: 1; /* Diminui o espaço entre as linhas do título */
+            margin: 0 0 25px 0; /* Remove margens extras e foca apenas no espaço inferior */
+        } /* Fecha h1 */
+
+        h1 span { color: var(--dourado); } /* Pinta especificamente o texto dentro da tag <span> de dourado */
+
+        .subtitulo { /* Estiliza o texto explicativo abaixo do título */
+            font-size: 1.2rem; /* Tamanho confortável para leitura */
+            color: #f0ebebc0; /* Usa o verde suave para não cansar a vista */
+            margin-bottom: 40px; /* Dá espaço para o formulário que vem abaixo */
+            line-height: 1.5; /* Espaçamento de linha ideal para parágrafos */
+            max-width: 600px; /* Evita que o texto fique largo demais e difícil de ler */
+            margin-left: auto; /* Truque de centralização em conjunto com margin-right */
+            margin-right: auto; /* Finaliza a centralização do bloco de texto */
+        } /* Fecha subtitulo */
+
+        .container-form { /* Caixa que agrupa o formulário e a mensagem de sucesso */
+            max-width: 500px; /* Limita a largura para o formulário não esticar demais */
+            margin: 0 auto; /* Garante que o bloco fique centralizado na tela */
+        } /* Fecha container-form */
+
+        .formulario { /* Estiliza a barra onde o usuário digita o e-mail */
+            display: flex; /* Alinha o campo de texto e o botão lado a lado */
+            background: var(--branco); /* Fundo branco para contraste */
+            padding: 8px; /* Espaço interno para os elementos não encostarem na borda */
+            border-radius: 12px; /* Bordas arredondadas modernas */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2); /* Sombra suave para dar profundidade (efeito 3D) */
+        } /* Fecha formulario */
+
+        .formulario input { /* Estiliza o campo de digitação */
+            flex: 1; /* Faz o campo de e-mail ocupar todo o espaço restante na barra */
+            padding: 15px; /* Dá espaço para o texto "respirar" lá dentro */
+            border: none; /* Remove a borda padrão feia do navegador */
+            font-size: 1rem; /* Tamanho da letra ao digitar */
+            outline: none; /* Remove o contorno azul que alguns navegadores colocam ao clicar */
+        } /* Fecha input */
+
+        .formulario button { /* Estiliza o botão de ação principal */
+            padding: 15px 25px; /* Define a altura e largura interna do botão */
+            background-color: var(--dourado); /* Fundo verde oficial */
+            color: var(--branco); /* Texto do botão em branco */
+            border: none; /* Remove bordas */
+            border-radius: 8px; /* Cantos arredondados condizentes com o formulário */
+            font-weight: 800; /* Texto em negrito forte */
+            cursor: pointer; /* Muda a seta do mouse para o ícone de 'mãozinha' */
+            transition: 0.4s ease; /* Faz a animação de hover ser suave */
+        } /* Fecha button */
+
+        .formulario button:hover { /* Efeito ao passar o mouse por cima do botão */
+            transform: scale(1.08); /* Aumenta o tamanho do botão em 8% (efeito de zoom) */
+            box-shadow: 0 5px 15px rgba(0, 107, 63, 0.4); /* Adiciona um brilho verde de sombra */
+        } /* Fecha hover do botão */
+
+        #mensagem-sucesso { /* Estilo da mensagem que aparece após assinar */
+            display: none; /* Esconde o elemento da tela assim que o site carrega */
+            background: var(--dourado); /* Fundo dourado para celebrar o sucesso */
+            color: rgb(238, 237, 237); /* Texto escuro para leitura clara sobre o dourado */
+            padding: 22px; /* Espaçamento generoso */
+            border-radius: 12px; /* Cantos arredondados */
+            font-weight: 700; /* Negrito */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2); /* Mesma sombra usada no formulário */
+            animation: entrarSuave 0.6s ease-out; /* Aplica a animação de "subida" definida abaixo */
+        } /* Fecha mensagem-sucesso */
+
+        @keyframes entrarSuave { /* Roteiro da animação de entrada */
+            from { opacity: 0; transform: translateY(10px); } /* Inicia transparente e 10px abaixo */
+            to { opacity: 1; transform: translateY(0); } /* Termina visível e na posição correta */
+        } /* Fecha animação */
+
+        .steps, .curiosidades { /* Estilização básica das seções de conteúdo */
+            padding: 80px 20px; /* Espaço vertical entre as seções */
+            max-width: 1000px; /* Limita a largura do conteúdo interno */
+            margin: 0 auto; /* Centraliza as seções na tela */
+        } /* Fecha seções */
+
+
+        .grid-steps, .grid-curiosidades { /* Sistema de colunas (Grid) */
+            display: grid; /* Ativa o modo de grade */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Cria colunas automáticas: no mínimo 280px cada */
+            gap: 30px; /* Espaço de 30 pixels entre os cards */
+            max-width: 1000px; /* Garante que a grade não passe de 1000px */
+            margin: 0 auto; /* Centraliza a grade */
+        } /* Fecha grids */
+
+        .step-card, .curiosidade-card { /* Estilo dos cartões de informação */
+            text-align: left; /* Alinha o texto interno à esquerda */
+            background: var(--cor-fundo-card); /* Fundo verde bem clarinho */
+            padding: 30px; /* Respiro interno para o texto */
+            border-radius: 20px; /* Cantos bem arredondados */
+            border-bottom: 5px solid var(--verde-principal); /* Linha grossa verde no fundo do card */
+            transition: 0.4s ease; /* Suaviza a animação de hover */
+        } /* Fecha cards */
+
+        .step-card:hover, .curiosidade-card:hover { /* Efeito ao passar o mouse nos cards */
+            transform: scale(1.05); /* O card cresce 5% */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* Sombra sutil para parecer que o card "levantou" */
+            cursor: pointer; /* Ícone de mãozinha */
+        } /* Fecha hover dos cards */
+
+        .curiosidade-card { border-bottom: 5px solid var(--cor-vermelho); } /* Altera a cor da linha de baixo para dourado nesta seção */
+
+        h2.secao-titulo1 { /* Estilo dos títulos de cada seção (H2) */
+            font-size: 2rem; /* Tamanho grande e legível */
+            margin-bottom: 40px; /* Espaço para não encostar na grade de cards */
+            color: var(--verde-principal); /* Cor verde principal */
+            font-weight: 900; /* Negrito máximo */
+            transition: 0.4s ease; /* Prepara para a animação de hover */
+            display: inline-block; /* Faz o título ser tratado como um bloco ajustado ao texto */
+        } /* Fecha secao-titulo */
+
+        h2.secao-titulo2 { /* Estilo dos títulos de cada seção (H2) */
+            font-size: 2rem; /* Tamanho grande e legível */
+            margin-bottom: 40px; /* Espaço para não encostar na grade de cards */
+            color: var(--cor-vermelho); /* Cor verde principal */
+            font-weight: 900; /* Negrito máximo */
+            transition: 0.4s ease; /* Prepara para a animação de hover */
+            display: inline-block; /* Faz o título ser tratado como um bloco ajustado ao texto */
+        } /* Fecha secao-titulo */
+
+
+        h2.secao-titulo1:hover, h2.secao-titulo2:hover { /* Brincadeira visual no título */
+            transform: scale(1.1); /* O título cresce ao passar o mouse */
+            color: var(--dourado); /* Muda para dourado */
+        } /* Fecha hover do título */
+
+        footer { padding: 50px; background: #f1f1f1; color: #777; text-align: center; font-size: 0.9rem; } /* Estilo do rodapé */
+        footer strong { color: var(--cor-azul); } /* Nome da marca em vermelho no rodapé */
+    </style> 
+    </head>
+<body> 
+    <nav class="navbar"> <!-- Cria a barra de navegação -->
+    <div class="container-nav"> <!-- Container interno da navbar -->
+
+        <span class="logo">🏆The Cup</span> <!-- Logo/nome do site -->
+
+        <div class="nav-links"> <!-- Agrupa os links da navegação -->
+
+            <a href="#form-copa" class="btn-nav">Inscreva-se grátis</a> <!-- Link que leva até o formulário na página -->
+ </div>
+        </div>
+    </nav>
+      
+    <section class="hero"> 
+    
+        <div class="hero-container">
+            
+            <span class="data-badge" id="contador">26 de março de 2026 • faltam 77 dias</span> 
+            
+            <h1>O melhor boletim matinal<br> sobre a <span>Copa de 2026</span></h1> 
+            
+            <p class="subtitulo">A dose diária de futebol para quem quer chegar no mundial sabendo mais que o narrador. 100% gratuito e direto no seu email.</p> 
+            
+            <div class="container-form"> <!-- Container que agrupa o formulário -->
+
+                <form id="form-copa" action="https://formspree.io/f/xeepqwyj" method="POST" class="formulario"> <!-- Formulário que envia dados para o Formspree via POST -->
+            
+                    <input type="email" name="email" placeholder="Seu e-mail" required> <!-- Campo de e-mail obrigatório com validação automática -->
+            
+                    <button type="submit">Assinar agora</button> <!-- Botão que envia o formulário -->
+            
+                </form> <!-- Fim do formulário -->
+            
+                <div id="mensagem-sucesso"> <!-- Área para exibir mensagem de sucesso -->
+            
+                    🎉 Bem-vindo ao time! Sua inscrição foi confirmada <!-- Texto de sucesso + quebra de linha -->
+            
+                </div> <!-- Fim da mensagem de sucesso -->
+            
+            </div> <!-- Fim do container -->
+        </div> 
+    </section>
+
+    <section class="steps"> <h2 class="secao-titulo1">Seus Benefícios</h2>
+        <div class="grid-steps"> <div class="step-card">
+                <h3>Onde Assistir</h3>
+                <p>Guia completo de transmissão (Globo, CazéTV, SporTV) para cada jogo do dia.</p>
+            </div>
+            <div class="step-card">
+                <h3>Caminho do Hexa</h3>
+                <p>Simulações reais de confrontos e o chaveamento completo das 48 seleções direto no seu e-mail.</p>
+            </div>
+            <div class="step-card">
+                <h3>Chuteira de Ouro</h3>
+                <p>Acompanhe a artilharia e as assistências em tempo real. Os números que importam toda manhã.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="curiosidades"> <h2 class="secao-titulo2">Curiosidades Históricas</h2>
+        <div class="grid-curiosidades"> <div class="curiosidade-card">
+                <h3>Maior goleada</h3>
+                <p>Em 1982, a Hungria aplicou 10 a 1 sobre El Salvador. O maior placar da história das Copas.</p>
+            </div>
+            <div class="curiosidade-card">
+                <h3>Maior Artilheiro</h3>
+                <p>Miroslav Klose (Alemanha) detém o recorde com 16 gols marcados em 4 edições diferentes.</p>
+            </div>
+            <div class="curiosidade-card">
+                <h3>Mais Jovem</h3>
+                <p>Pelé é o jogador mais novo a marcar e vencer uma final, com apenas 17 anos em 1958.</p>
+            </div>
+            <div class="curiosidade-card">
+                <h3>Maior Campeão</h3>
+                <p>O Brasil segue no topo isolado como o único Pentacampeão mundial (1958, 1962, 1970, 1994 e 2002).</p>
+            </div>
+            <div class="curiosidade-card">
+                <h3>A Maior Copa</h3>
+                <p>2026 será a edição com o maior número de seleções da história: 48 países disputando o troféu.</p>
+            </div>
+            <div class="curiosidade-card">
+                <h3>O Trono Hermano</h3>
+                <p>Em 2022, a Argentina quebrou um jejum de 36 anos, e Messi se tornou o primeiro jogador da história a marcar gols em todas as fases de uma mesma Copa.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer> <p><strong>the cup</strong> • 2026 EUA, México e Canadá</p>
+    </footer>
+
+    <script> /* Inicia o JavaScript para controlar as ações da página */
+        const form = document.getElementById('form-copa'); /* Cria uma constante que armazena o formulário através do ID dele */
+        const mensagemSucesso = document.getElementById('mensagem-sucesso'); /* Cria uma constante para a div de sucesso */
+
+        form.addEventListener('submit', async function(e) { /* Adiciona um 'escutador' que detecta quando o usuário tenta enviar o form */
+            e.preventDefault(); /* Comando vital: impede a página de atualizar, permitindo que o JS faça o envio em silêncio */
+            
+            const data = new FormData(form); /* Captura todos os dados digitados dentro do formulário e organiza em um objeto */
+            
+            const response = await fetch(form.action, { /* Faz uma requisição de rede para o link do Formspree */
+                method: 'POST', /* Define que o envio é do tipo POST (envio seguro de dados) */
+                body: data, /* Envia o e-mail capturado dentro do corpo da requisição */
+                headers: { 'Accept': 'application/json' } /* Avisa ao servidor que esperamos uma resposta em formato JSON */
+            }); /* O comando 'await' faz o código esperar a resposta do servidor antes de continuar */
+
+            if (response.ok) { /* Verifica se o servidor retornou um status de sucesso (OK) */
+                form.style.display = 'none'; /* Se deu certo, altera o CSS do formulário para 'escondido' */
+                mensagemSucesso.style.display = 'block'; /* Altera o CSS da mensagem de sucesso para 'visível' */
+            } else { /* Caso aconteça algum erro de conexão ou no servidor */
+                alert('Ops! Algo deu errado. Tente novamente.'); /* Mostra uma caixa de alerta padrão do navegador */
+            } /* Fecha a condição de sucesso/erro */
+        }); /* Fecha a função do escutador de envio */
+        // Função que calcula e atualiza o texto do contador
+    function atualizarContador() {
+        const agora = new Date(); // Captura a data e hora exata de "agora" no computador do usuário
+        const dataCopa = new Date('2026-06-11T00:00:00'); // Define a data de início da Copa (11 de junho de 2026)
+    
+    // Calcula a diferença em milissegundos entre as duas datas
+    const diferencaEmMs = dataCopa - agora; 
+    
+    // Converte milissegundos em dias (1000ms * 60s * 60m * 24h = 86.400.000ms por dia)
+    const diasFaltando = Math.floor(diferencaEmMs / (1000 * 60 * 60 * 24));
+    
+    // Formata a data de hoje para aparecer bonitinha (ex: 9 de abr. de 2026)
+    const hojeFormatado = agora.toLocaleDateString('pt-br', { day: 'numeric', month: 'long', year: 'numeric' });
+    
+    // Seleciona o elemento da badge pelo ID
+    const elementoBadge = document.getElementById('contador');
+    
+    // Altera o texto interno para mostrar a data atualizada e o cálculo dos dias
+    elementoBadge.innerHTML = `${hojeFormatado} • FALTAM ${diasFaltando} DIAS PARA A COPA`;
+}
+
+// Executa a função assim que a página termina de carregar
+atualizarContador();
+    </script> </body> </html>
